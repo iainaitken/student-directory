@@ -20,7 +20,7 @@ def input_students
   # get the first name
   
   while true
-    puts "Please enter a name, or press return twice to exit"
+    puts "Please enter a name, or press return to exit"
     name = gets
     name.gsub!(/\n/,"")
     if !name.empty?
@@ -44,17 +44,17 @@ end
 
 def print(students)
   
-  # iterate through students, create array of cohorts
-  cohorts = []
-  students.each do |student|
-    cohorts << student[:cohort]
-  end
-
-  # iterate through that array, print each student in students where the cohort matches
-  cohorts.uniq.each do |cohort|
-    students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)" if student[:cohort] == cohort }
-  end
-    
+  if !students.empty?
+    # iterate through students, create array of cohorts
+    cohorts = []
+    students.each do |student|
+      cohorts << student[:cohort]
+    end
+    # iterate through that array, print each student in students where the cohort matches
+    cohorts.uniq.each do |cohort|
+      students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)".center(60) if student[:cohort] == cohort }
+    end
+  end  
   
 end
 
