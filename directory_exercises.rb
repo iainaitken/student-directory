@@ -40,11 +40,11 @@ def print_header
 end
 
 def print(students)
-  students.each_with_index do |student, index|
-    # print students whose name starts with a specific letter
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)" if student[:name].start_with?("D")
-    # print students whose name is shorter than 12 characters
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)" if student[:name].length < 12
+  i = 0
+  l = students.length
+  while i < l
+    puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+    i += 1
   end
 end
 
