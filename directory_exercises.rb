@@ -1,4 +1,4 @@
-
+=begin
 students = [ 
   {name: "Dr. Hannibal Lecter", cohort: :december, hobbies: "Cooking", country_of_birth: "USA", height: "178cm"},
   {name: "Darth Vader", cohort: :november, hobbies: "The Force", country_of_birth: "Space", height: "187cm"},
@@ -12,8 +12,8 @@ students = [
   {name: "Joffrey Baratheon", cohort: :december, hobbies: "Despotism", country_of_birth: "Westeros", height: "167cm"},
   {name: "Norman Bates", cohort: :november, hobbies: "Hospitality", country_of_birth: "USA", height: "181cm"}
 ]
+=end
 
-=begin
 def input_students
   # create an empty array
   students = []
@@ -21,7 +21,8 @@ def input_students
   
   while true
     puts "Please enter a name, or press return twice to exit"
-    name = gets.chomp
+    name = gets
+    name.gsub!(/\n/,"")
     if !name.empty?
       puts "Please enter a cohort"
       cohort = gets.chomp.downcase.to_sym
@@ -35,7 +36,6 @@ def input_students
   #return the array of students
   students
 end
-=end
 
 def print_header
   puts "The students of Villains Academy".center(60)
@@ -63,7 +63,7 @@ def print_footer(students)
 end
 
 # nothing happens until we call the methods
-# students = input_students
+students = input_students
 print_header
 print(students)
 print_footer(students)
