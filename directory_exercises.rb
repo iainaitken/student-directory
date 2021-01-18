@@ -35,21 +35,21 @@ end
 =end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy".center(60)
+  puts "-------------".center(60)
 end
 
 def print(students)
   i = 0
   l = students.length
   while i < l
-    puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+    puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)".center(60)
     i += 1
   end
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{names.count} great students".center(60)
 end
 
 # nothing happens until we call the methods
