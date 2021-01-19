@@ -46,10 +46,12 @@ def print_header
 end
 
 def print_menu
+  puts "-----Menu-----"
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
   puts "9. Exit"
+  puts "--------------"
 end
 
 def print_students_list
@@ -81,6 +83,7 @@ def save_students
     csv_line = [student[:name], student[:cohort]].join(",")
     file.puts csv_line
   end
+  puts "#{@students.count} records saved to file"
   file.close
 end
 
@@ -124,11 +127,21 @@ At the same time, I created a new method, user_input, as we were repeating that 
 by using a ternary operator, and then remving the return if nil code, which no longer served a purpose.
 
 3. Refactoring. See 1 above for user_input. Also:
+
 Shortened save_students by taking out the variable student_data, which I don't think adds anything to the code;
 [student[:name], student[:cohort]].join is readable without the additional variable.
+
 Removed option 4 from print_menu and process(selection) as loading students.csv now takes place automatically; 
 if the load fails the program exits, so there are no circumstances in which a manual load would take place.
+
 Centered text when showing students - this makes the list stand out from the command line commands.  Also added a 
 second set of dashes and capitalised the cohort.
+
+Amended the instructions in input_students, which did not match the actions the user needs to take (you 
+only need to hit return once to exit, and you are entering a single student at a time)
+
+4. Only one of the three actions needs feedback (save the list of students).  input_students already has feedback
+when records are successfully added, and when show_students is selected, the user sees the printed items.  
+
 
 =end
