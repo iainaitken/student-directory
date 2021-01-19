@@ -32,12 +32,12 @@ def interactive_menu
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-      insert_to_db(name, cohort)
+  File.open(filename, "r") do |file|
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(',')
+        insert_to_db(name, cohort)
+    end
   end
-  file.close
 end
 
 def print_footer
@@ -82,14 +82,14 @@ end
 
 def save_students
   #open the file for writing
-  file = File.open(choose_filename, "w")
+  File.open(choose_filename, "w") do |file|
   #iterate over the array of students
-  @students.each do |student|
-    csv_line = [student[:name], student[:cohort]].join(",")
-    file.puts csv_line
+    @students.each do |student|
+      csv_line = [student[:name], student[:cohort]].join(",")
+      file.puts csv_line
+    end
   end
   puts "#{@students.count} records saved to file"
-  file.close
 end
 
 def show_students
@@ -148,5 +148,10 @@ only need to hit return once to exit, and you are entering a single student at a
 4. Only one of the three actions needs feedback (save the list of students).  input_students already has feedback
 when records are successfully added, and when show_students is selected, the user sees the printed items.  
 
+5. I made the script more flexible by including a separate method choose_filename
+
+6. Code refactored to use code blocks.
+
+7. 
 
 =end
