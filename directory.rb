@@ -1,5 +1,10 @@
 @students = []
 
+def choose_filename
+  puts "Please enter a filename"
+  user_input
+end  
+  
 def input_students
   puts "Please enter the name of a student, and hit return"
   puts "To finish, just hit return"
@@ -77,7 +82,7 @@ end
 
 def save_students
   #open the file for writing
-  file = File.open("students.csv", "w")
+  file = File.open(choose_filename, "w")
   #iterate over the array of students
   @students.each do |student|
     csv_line = [student[:name], student[:cohort]].join(",")
