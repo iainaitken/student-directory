@@ -153,6 +153,4 @@ when records are successfully added, and when show_students is selected, the use
 
 7. Refactored
 
-8. 
-
 =end
