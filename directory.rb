@@ -94,8 +94,8 @@ def show_students
 end
 
 def try_load_students
-  filename = ARGV.first # first argument from the command line
-  return if filename.nil? # get out of the method if it isn't given
+  # first argument from the command line or students.csv if no command line argument passed
+  filename = ARGV.empty? ? "students.csv" : ARGV.first 
   if File.exists?(filename) # if it exists
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
@@ -112,3 +112,18 @@ end
 # nothing happens until we call the methods
 try_load_students
 interactive_menu
+
+=begin
+notes for more exercises
+
+1. To solve the DRY problem I created a new method, insert_to_db, with two parameters (name and cohort).
+This way, I can invoke the method in two places (load_students and input_students) where we have slightly
+different inputs. 
+
+At the same time, I created a new method, user_input, as we were repeating that bit of code three times
+(this became particularly apparent when repeatedly prepending STDIN to the code).
+
+2. By providing students.csv as a default filename - we would need to amend try_load_students. I did this 
+by using a ternary operator, and then remving the return if nil code, which no longer served a purpose.
+
+=end
