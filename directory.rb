@@ -1,8 +1,8 @@
 @students = []
 
 def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
+  puts "Please enter the name of a student, and hit return"
+  puts "To finish, just hit return"
   # get the first name
   name = user_input
   #while the name is not empty, repeat this code
@@ -36,25 +36,25 @@ def load_students(filename = "students.csv")
 end
 
 def print_footer
-  puts "Overall, we have #{@students.count} great students"
+  puts "-------------".center(80)
+  puts "Overall, we have #{@students.count} great students".center(80)
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy".center(80)
+  puts "-------------".center(80)
 end
 
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
   puts "9. Exit"
 end
 
 def print_students_list
   @students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort].capitalize} cohort)".center(80)
   end
 end
 
@@ -66,8 +66,6 @@ def process(selection)
       show_students
     when "3"
       save_students
-    when "4"
-      load_students
     when "9"
       exit
     else
@@ -80,8 +78,7 @@ def save_students
   file = File.open("students.csv", "w")
   #iterate over the array of students
   @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
+    csv_line = [student[:name], student[:cohort]].join(",")
     file.puts csv_line
   end
   file.close
@@ -125,5 +122,13 @@ At the same time, I created a new method, user_input, as we were repeating that 
 
 2. By providing students.csv as a default filename - we would need to amend try_load_students. I did this 
 by using a ternary operator, and then remving the return if nil code, which no longer served a purpose.
+
+3. Refactoring. See 1 above for user_input. Also:
+Shortened save_students by taking out the variable student_data, which I don't think adds anything to the code;
+[student[:name], student[:cohort]].join is readable without the additional variable.
+Removed option 4 from print_menu and process(selection) as loading students.csv now takes place automatically; 
+if the load fails the program exits, so there are no circumstances in which a manual load would take place.
+Centered text when showing students - this makes the list stand out from the command line commands.  Also added a 
+second set of dashes and capitalised the cohort.
 
 =end
