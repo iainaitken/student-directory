@@ -1,3 +1,5 @@
+require 'csv'
+
 @students = []
 
 def choose_filename
@@ -32,11 +34,10 @@ def interactive_menu
 end
 
 def load_students(filename = "students.csv")
-  File.open(filename, "r") do |file|
-    file.readlines.each do |line|
-      name, cohort = line.chomp.split(',')
-        insert_to_db(name, cohort)
-    end
+  CSV.foreach(filename) do |line|
+    name = line.shift
+    cohort = line.pop
+    insert_to_db(name, cohort)
   end
 end
 
@@ -81,12 +82,10 @@ def process(selection)
 end
 
 def save_students
-  #open the file for writing
-  File.open(choose_filename, "w") do |file|
-  #iterate over the array of students
+  
+  CSV.open(choose_filename, "w") do |csv|
     @students.each do |student|
-      csv_line = [student[:name], student[:cohort]].join(",")
-      file.puts csv_line
+      csv << [student[:name], student[:cohort]]
     end
   end
   puts "#{@students.count} records saved to file"
@@ -152,6 +151,8 @@ when records are successfully added, and when show_students is selected, the use
 
 6. Code refactored to use code blocks.
 
-7. 
+7. Refactored
+
+8. 
 
 =end
